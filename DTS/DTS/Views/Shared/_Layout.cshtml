@@ -1,0 +1,102 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>VİA | Demirbaş Takip Sistemi</title>
+    <!--Rendered-->
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/vendor/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <!-- Material Design Bootstrap -->
+    <link href="~/Content/vendor/css/mdb.min.css" rel="stylesheet" />
+    <!-- Your custom styles (optional) -->
+    <link href="~/Content/vendor/css/style.min.css" rel="stylesheet" />
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+    <style>
+        .map-container {
+            overflow: hidden;
+            padding-bottom: 56.25%;
+            position: relative;
+            height: 0;
+        }
+
+            .map-container iframe {
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+            }
+    </style>
+</head>
+
+<body class="grey lighten-3" style="font-family: 'Poppins', sans-serif; font-weight:bolder;">
+
+    <!--Main Navigation-->
+    <header>
+        <!-- Sidebar -->
+        <div class="sidebar-fixed position-fixed">
+            <a class="logo-wrapper waves-effect">
+                <img src="~/Content/images/via.png" class="img-responsive" alt="VIA Teknoloji" />
+            </a>
+
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <i>&nbsp; &nbsp; &nbsp;</i> <i class="fas fa-user-tie mr-3"></i>
+                    @Html.ActionLink("" + User.Identity.Name + "", "List", "Products", routeValues: null, htmlAttributes: new { Style = "color:green" })
+                }
+            }
+
+            <br />
+
+                @Html.Partial("~/Views/Account/LayoutMenu.cshtml")
+
+            @*<div class="author">
+                <div class="footer-copyright py-3">
+                    © 2019 Copyright
+                </div>
+        </div>*@
+        </div>
+        <!-- Sidebar -->
+
+    </header>
+    <!--Main Navigation-->
+    <!--Main layout-->
+    <!--Main layout-->
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/JavaScript" src="~/Scripts/particles.js"></script>
+    <script type="text/JavaScript" src="~/Scripts/app.js"></script>
+    <script type="text/JavaScript" src="~/Scripts/print.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/js/bootstrap.min.js"></script>
+    @*<script type="text/javascript" src="~/Content/vendor/js/particles.js"></script>*@
+    <script type="text/javascript" src="~/Content/vendor/js/mdb.min.js"></script>
+    <script type="text/javascript" src="~/Content/vendor/js/popper.min.js"></script>
+    @*<script type="text/javascript" src="~/Content/vendor/js/jquery-magnific-popup.min.js"></script>*@
+    <script type="text/javascript">new WOW().init();</script>
+
+    <main class="mx-lg-5">
+        <div class="container-fluid">
+            @RenderBody()
+        </div>
+    </main>
+</body>
+</html>

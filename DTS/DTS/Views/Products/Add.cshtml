@@ -1,0 +1,179 @@
+﻿@using System.Collections
+@using System.Web.Mvc.Html
+@model DTS.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/vendor/css/argon.min.css" rel="stylesheet" />
+
+<style>
+    .ustNav {
+        margin-top: 45px;
+    }
+</style>
+
+<!-- Heading -->
+<div class="container ustNav">
+    <div class="row">
+        <div class="col-xl-12 order-xl-1">
+            <div class="card bg-secondary shadow" style="background-color:white">
+                <div class="card-body  d-sm-flex justify-content-center">
+                    <i class="fa fa-cart-plus" style="color:#139747"></i> &nbsp; &nbsp;<span style="color:#139747; font-weight:bolder">YENİ DEMİRBAŞ</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container ustNav">
+    <div class="row">
+        <div class="col-xl-12 order-xl-1">
+            <div class="card bg-secondary shadow" style="background-color:white">
+                <div class="card-body">
+                    @using (Html.BeginForm("Add", "Products", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                    <form>
+
+                        <!-- Address -->
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        <div class="pl-lg-4">
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <i style="color:#139747;"></i> <i class="fa fa-fingerprint"></i>&nbsp;
+                                        <label class="form-control-label">Seri Numarası</label>
+                                        <input type="text" name="ProductSerialNumber" class="form-control" autocomplete="off" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <i class="fa fa-archive"></i>&nbsp;
+                                        <label class="form-control-label">Demirbaş Kategori</label>
+                                        <select class="form-control" id="projectStatus1" name="CategoryID" required>
+                                            <option value="" disabled selected>Seciniz</option>
+                                            @foreach (var item in Model.categoriesList)
+                                            {
+                                                <option value="@item.CategoryID">@item.CategoryName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <i class="fa fa-user-tie"></i>&nbsp;
+                                        <label class="form-control-label">Demirbaş Sorumlusu</label>
+                                        <select class="form-control" id="projectStatus2" name="PersonID" required>
+                                            <option value="" disabled selected>Seciniz</option>
+                                            @foreach (var item in Model.personList)
+                                            {
+                                                <option value="@item.PersonID">@item.PersonName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <hr class="my-4">
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <i class="fa fa-sort-numeric-up"></i>&nbsp;
+                                        <label class="form-control-label">Adedi</label>
+                                        <input type="number" name="ProductAmount" class="form-control" autocomplete="off" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <i class="fa fa-copyright"></i>&nbsp;
+                                        <label class="form-control-label">Markası</label>
+                                        <input type="text" name="ProductBrand" class="form-control" autocomplete="off" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <i class="fa fa-align-right"></i>&nbsp;
+                                        <label class="form-control-label">Özellikler/Açıklama</label>
+                                        <input type="text" name="ProductFeatures" class="form-control" autocomplete="off" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <i class="fa fa-calendar-alt"></i>&nbsp;
+                                        <label class="form-control-label">Kayıt Tarihi</label>
+                                        <input type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" name="RegisterDateTime" class="form-control" autocomplete="off" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <i class="fa fa-hourglass-half"></i>&nbsp;
+                                        <label class="form-control-label">Garanti Tarihi</label>
+                                        <input type="date" name="ProductWarrantyDate" class="form-control" autocomplete="off" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <i class="fa fa-phone-square"></i>&nbsp;
+                                        <label class="form-control-label">Servis İletişim</label>
+                                        <input type="text" name="ServiceContact" class="form-control" autocomplete="off" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <i class="fa fa-image"></i>&nbsp;
+                                        <label class="form-control-label">Ürün Fotoğrafı</label>
+                                        <br />
+                                        <input id="file" name="file" type="file" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <br />
+                                        <input type="submit" value="Ürün Ekle" class="btn btn-lg btn-block btn-outline-light-green"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <br />
+                                        <input type="button" value="Listeye Dön" class="btn btn-lg btn-block btn-outline-light-green" onclick="location.href='@Url.Action("List", "Products")'" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+                    </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

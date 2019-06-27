@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1e42217cc568440d83c9104b1e981d8f" Name="Diagram1">
+        <EntityTypeShape EntityType="UTSDBContext.Category" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSDBContext.CurrentUserData" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSDBContext.Login" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSDBContext.PatchNotes" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSDBContext.Person" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSDBContext.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSDBContext.Project" Width="1.5" PointX="2.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSDBContext.ProjectProducts" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSDBContext.Requests" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSDBContext.Role" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="UTSDBContext.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSDBContext.FK_PatchNotes_PatchNotes" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSDBContext.R_10" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSDBContext.FK_Product_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSDBContext.FK_ProjectProducts_Project" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

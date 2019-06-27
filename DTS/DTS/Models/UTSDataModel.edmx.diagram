@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f9fa56b0191d47f89fd2905b8841c7fc" Name="Diagram1">
+        <EntityTypeShape EntityType="DemirbasTakipSistemiModel.Category" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiModel.Location" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiModel.Login" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiModel.Person" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiModel.Product" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiModel.Project" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiModel.ProjectProducts" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiModel.Role" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiModel.CurrentUserData" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="DemirbasTakipSistemiModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DemirbasTakipSistemiModel.FK_Product_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="DemirbasTakipSistemiModel.R_10" ManuallyRouted="false" />
+        <AssociationConnector Association="DemirbasTakipSistemiModel.FK_Product_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="DemirbasTakipSistemiModel.FK_Project_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="DemirbasTakipSistemiModel.FK_ProjectProducts_Project" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

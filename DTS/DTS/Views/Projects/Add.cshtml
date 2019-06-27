@@ -1,0 +1,45 @@
+﻿@model DTS.Models.Project
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="login-page">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            <div class="form">
+                <h5 style="font-weight:bolder; color:darkgreen"><span class="fa fa-folder-plus"></span> &nbsp; Yeni Proje</h5>
+                <hr />
+                <br />
+
+                <form class="login-form" autocomplete="off">
+                    @Html.EditorFor(model => model.projectCode, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", placeholder = "Proje Kodu" } })
+
+                    @Html.EditorFor(model => model.projectName, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", placeholder = "Proje Müşterisi" } })
+
+                    @Html.EditorFor(model => model.projectClient, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", placeholder = "Proje Adı" } })
+
+                    @Html.EditorFor(model => model.projectStartDate, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", placeholder = "Proje Tarihi" } })
+
+                    <!-- Proje Durumu: Aktif/Pasif -->
+                    <select class="form-control" id="projectStatus" name="projectStatus">
+                        <option value="" disabled selected>Proje Durumu</option>
+                        <option value="Aktif">Aktif</option>
+                        <option value="Pasif">Pasif</option>
+                    </select>
+
+                    <br />
+
+                    <input type="submit" value="PROJE EKLE" class="btn btn-green" style="font-weight:bolder" />
+                    @*<span value="Dön" class="btn btn-outline-black" onclick="location.href='@Url.Action("List", "Projects")'">Listeye Dön</span>*@
+
+
+                </form>
+            </div>
+        }
+    </div>
+

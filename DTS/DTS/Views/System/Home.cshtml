@@ -1,0 +1,92 @@
+﻿@model IEnumerable<DTS.Models.Requests>
+@{
+                /**/
+
+                ViewBag.Title = "Home";
+                Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/System/SystemMenu.cshtml")
+
+<hr />
+
+<!-- List Table -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0 d-flex justify-content-between">
+                    <div>
+                        <h3 class="mb-0">TALEPLER / ÖNERİLER<br /></h3>Geliştiriciye yenilik, değişiklik veya hata bildiriminde bulunun
+                    </div>
+                    <div>
+                        <button class="btn btn-icon btn-2 btn-outline-blue" type="button" onclick="location.href='@Url.Action("Feedback", "System", new {})'">
+                            <span class="btn-inner--icon"><i class="fa fa-envelope"></i></span>&nbsp; Tamamlanan Talepler
+                        </button>
+                        <button class="btn btn-icon btn-2 btn-outline-blue" type="button" onclick="location.href='@Url.Action("Feedback", "System", new {})'">
+                            <span class="btn-inner--icon"><i class="fa fa-envelope"></i></span>&nbsp; Talep Oluştur
+                        </button>
+                    </div>
+                    
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Talep Durumu</th>
+                                <th scope="col">Konu Başlığı</th>
+                                <th scope="col">Kategori</th>
+                                <th scope="col">Geliştirici</th>
+                                <th scope="col">Talep Tarihi</th>
+                                <th scope="col">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @{
+                                            if (item.requestStatus == false)
+                                            {
+                                                <span class="badge badge-primary">Beklemede</span>
+                                            }
+
+                                            else
+                                            {
+                                                <span class="badge badge-danger">Kapatıldı</span>
+                                            }
+                                        }
+                                    </td>
+                                    <td> @item.requestSubjectTitle </td>
+                                    <td>
+                                        @item.requestCategoryName
+                                    </td>
+                                    <td>
+                                        @item.requestReceiverID
+                                    </td>
+                                    <td>
+                                        @item.requestDateTime
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-icon btn-2 btn-outline-blue" type="button" onclick="location.href='@Url.Action("UpdateUser", "Admin", new { id = item.requestID })'">
+                                            <span class="btn-inner--icon"><i class="fa fa-envelope-open-text"></i></span>
+
+                                        </button>
+                                        <button class="btn btn-icon btn-2 btn-outline-danger" type="button">
+                                            <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                                }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Footer Table -->
+                <div class="card-footer py-4"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="607d850d56ca42d49d28f88e7fd9d8a8" Name="Diagram1">
+        <EntityTypeShape EntityType="UTSEntitiesModel.Category" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSEntitiesModel.CurrentUserData" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSEntitiesModel.Login" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSEntitiesModel.Person" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSEntitiesModel.Product" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSEntitiesModel.Project" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSEntitiesModel.ProjectProducts" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSEntitiesModel.Role" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="UTSEntitiesModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSEntitiesModel.R_10" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSEntitiesModel.FK_Product_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSEntitiesModel.FK_ProjectProducts_Project" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="UTSEntitiesModel.PatchNote" Width="1.5" PointX="10.25" PointY="0.75" />
+        <AssociationConnector Association="UTSEntitiesModel.FK_PatchNotes_PatchNotes" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,603 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UTSContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CurrentUserData">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="currentUserRoleID" Type="int" Nullable="false" />
+          <Property Name="currentUserName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="role_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatchNotes">
+          <Key>
+            <PropertyRef Name="patchID" />
+          </Key>
+          <Property Name="patchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="patchVersion" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="patchType" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="patchNote" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="patchDateTime" Type="datetime" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="PersonName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PersonContact" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductSerialNumber" />
+          </Key>
+          <Property Name="ProductSerialNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="ProductBrand" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="RegisterDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ProductAmount" Type="int" Nullable="false" />
+          <Property Name="ProductWarrantyDate" Type="datetime" Nullable="false" />
+          <Property Name="ServiceContact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductFeatures" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductImage" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="projectCode" />
+          </Key>
+          <Property Name="projectCode" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="projectClient" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="projectName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="projectStartDate" Type="datetime" Nullable="false" />
+          <Property Name="projectStatus" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectProducts">
+          <Key>
+            <PropertyRef Name="productSerialNumber" />
+          </Key>
+          <Property Name="projectCode" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="productSerialNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="productBrand" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="productModel" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="registerDateTime" Type="datetime" Nullable="false" />
+          <Property Name="productAmount" Type="int" Nullable="false" />
+          <Property Name="productWarrantyStartDate" Type="datetime" Nullable="false" />
+          <Property Name="productServiceContact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="productFeatures" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="productImage" Type="nvarchar" MaxLength="100" />
+          <Property Name="productWarrantyFinishDate" Type="datetime" Nullable="false" />
+          <Property Name="productProvider" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="requestID" />
+          </Key>
+          <Property Name="requestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="requestUsername" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="requestSubjectTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="requestCategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="requestDateTime" Type="datetime" Nullable="false" />
+          <Property Name="requestMessage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="requestReceiverID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="requestStatus" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PatchNotes_PatchNotes">
+          <End Role="Login" Type="Self.Login" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PatchNotes" Type="Self.PatchNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatchNotes">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectProducts_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectProducts" Type="Self.ProjectProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectCode" />
+            </Principal>
+            <Dependent Role="ProjectProducts">
+              <PropertyRef Name="projectCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_10">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="LoginByUsernamePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="UTSContextModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CurrentUserData" EntityType="Self.CurrentUserData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatchNotes" EntityType="Self.PatchNotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectProducts" EntityType="Self.ProjectProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PatchNotes_PatchNotes" Association="Self.FK_PatchNotes_PatchNotes">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="PatchNotes" EntitySet="PatchNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Person" Association="Self.FK_Product_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectProducts_Project" Association="Self.FK_ProjectProducts_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectProducts" EntitySet="ProjectProducts" />
+          </AssociationSet>
+          <AssociationSet Name="R_10" Association="Self.R_10">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UTSContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="CurrentUserData">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="currentUserRoleID" Type="Int32" Nullable="false" />
+          <Property Name="currentUserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PatchNotes" Relationship="Self.FK_PatchNotes_PatchNotes" FromRole="Login" ToRole="PatchNotes" />
+          <NavigationProperty Name="Role" Relationship="Self.R_10" FromRole="Login" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="PatchNotes">
+          <Key>
+            <PropertyRef Name="patchID" />
+          </Key>
+          <Property Name="patchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="patchVersion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patchType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patchNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="patchDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Login" Relationship="Self.FK_PatchNotes_PatchNotes" FromRole="PatchNotes" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="PersonName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PersonContact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Person" FromRole="Person" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductSerialNumber" />
+          </Key>
+          <Property Name="ProductSerialNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="ProductBrand" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="RegisterDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProductAmount" Type="Int32" Nullable="false" />
+          <Property Name="ProductWarrantyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ServiceContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductFeatures" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductImage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Product_Person" FromRole="Product" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="projectCode" />
+          </Key>
+          <Property Name="projectCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="projectClient" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="projectName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="projectStartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="projectStatus" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ProjectProducts" Relationship="Self.FK_ProjectProducts_Project" FromRole="Project" ToRole="ProjectProducts" />
+        </EntityType>
+        <EntityType Name="ProjectProducts">
+          <Key>
+            <PropertyRef Name="productSerialNumber" />
+          </Key>
+          <Property Name="projectCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="productSerialNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="productBrand" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="productModel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="registerDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="productAmount" Type="Int32" Nullable="false" />
+          <Property Name="productWarrantyStartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="productServiceContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="productFeatures" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="productImage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="productWarrantyFinishDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="productProvider" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="Self.FK_ProjectProducts_Project" FromRole="ProjectProducts" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="requestID" />
+          </Key>
+          <Property Name="requestID" Type="Int32" Nullable="false" />
+          <Property Name="requestSubjectTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="requestCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="requestDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="requestMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="requestStatus" Type="Boolean" Nullable="false" />
+          <Property Name="requestUsername" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="requestReceiverID" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Login" Relationship="Self.R_10" FromRole="Role" ToRole="Login" />
+        </EntityType>
+        <Association Name="FK_Product_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatchNotes_PatchNotes">
+          <End Role="Login" Type="Self.Login" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PatchNotes" Type="Self.PatchNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PatchNotes">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_10">
+          <End Role="Role" Type="Self.Role" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="role_id" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="role_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="PersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectProducts_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProjectProducts" Type="Self.ProjectProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="projectCode" />
+            </Principal>
+            <Dependent Role="ProjectProducts">
+              <PropertyRef Name="projectCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UTSContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Category" EntityType="Self.Category" />
+          <EntitySet Name="CurrentUserData" EntityType="Self.CurrentUserData" />
+          <EntitySet Name="Login" EntityType="Self.Login" />
+          <EntitySet Name="PatchNotes" EntityType="Self.PatchNotes" />
+          <EntitySet Name="Person" EntityType="Self.Person" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Project" EntityType="Self.Project" />
+          <EntitySet Name="ProjectProducts" EntityType="Self.ProjectProducts" />
+          <EntitySet Name="Requests" EntityType="Self.Requests" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatchNotes_PatchNotes" Association="Self.FK_PatchNotes_PatchNotes">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="PatchNotes" EntitySet="PatchNotes" />
+          </AssociationSet>
+          <AssociationSet Name="R_10" Association="Self.R_10">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Person" Association="Self.FK_Product_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectProducts_Project" Association="Self.FK_ProjectProducts_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectProducts" EntitySet="ProjectProducts" />
+          </AssociationSet>
+          <FunctionImport Name="LoginByUsernamePassword" ReturnType="Collection(UTSContextModel.LoginByUsernamePassword_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="LoginByUsernamePassword_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="role_id" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UTSContextModelStoreContainer" CdmEntityContainer="UTSContext">
+          <EntitySetMapping Name="Category">
+            <EntityTypeMapping TypeName="UTSContextModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CurrentUserData">
+            <EntityTypeMapping TypeName="UTSContextModel.CurrentUserData">
+              <MappingFragment StoreEntitySet="CurrentUserData">
+                <ScalarProperty Name="currentUserRoleID" ColumnName="currentUserRoleID" />
+                <ScalarProperty Name="currentUserName" ColumnName="currentUserName" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="UTSContextModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatchNotes">
+            <EntityTypeMapping TypeName="UTSContextModel.PatchNotes">
+              <MappingFragment StoreEntitySet="PatchNotes">
+                <ScalarProperty Name="patchID" ColumnName="patchID" />
+                <ScalarProperty Name="patchVersion" ColumnName="patchVersion" />
+                <ScalarProperty Name="patchType" ColumnName="patchType" />
+                <ScalarProperty Name="patchNote" ColumnName="patchNote" />
+                <ScalarProperty Name="patchDateTime" ColumnName="patchDateTime" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="UTSContextModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="PersonName" ColumnName="PersonName" />
+                <ScalarProperty Name="PersonContact" ColumnName="PersonContact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="UTSContextModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ProductSerialNumber" ColumnName="ProductSerialNumber" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="ProductBrand" ColumnName="ProductBrand" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="RegisterDateTime" ColumnName="RegisterDateTime" />
+                <ScalarProperty Name="ProductAmount" ColumnName="ProductAmount" />
+                <ScalarProperty Name="ProductWarrantyDate" ColumnName="ProductWarrantyDate" />
+                <ScalarProperty Name="ServiceContact" ColumnName="ServiceContact" />
+                <ScalarProperty Name="ProductFeatures" ColumnName="ProductFeatures" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project">
+            <EntityTypeMapping TypeName="UTSContextModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="projectCode" ColumnName="projectCode" />
+                <ScalarProperty Name="projectClient" ColumnName="projectClient" />
+                <ScalarProperty Name="projectName" ColumnName="projectName" />
+                <ScalarProperty Name="projectStartDate" ColumnName="projectStartDate" />
+                <ScalarProperty Name="projectStatus" ColumnName="projectStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectProducts">
+            <EntityTypeMapping TypeName="UTSContextModel.ProjectProducts">
+              <MappingFragment StoreEntitySet="ProjectProducts">
+                <ScalarProperty Name="projectCode" ColumnName="projectCode" />
+                <ScalarProperty Name="productSerialNumber" ColumnName="productSerialNumber" />
+                <ScalarProperty Name="productBrand" ColumnName="productBrand" />
+                <ScalarProperty Name="productModel" ColumnName="productModel" />
+                <ScalarProperty Name="registerDateTime" ColumnName="registerDateTime" />
+                <ScalarProperty Name="productAmount" ColumnName="productAmount" />
+                <ScalarProperty Name="productWarrantyStartDate" ColumnName="productWarrantyStartDate" />
+                <ScalarProperty Name="productServiceContact" ColumnName="productServiceContact" />
+                <ScalarProperty Name="productFeatures" ColumnName="productFeatures" />
+                <ScalarProperty Name="productImage" ColumnName="productImage" />
+                <ScalarProperty Name="productWarrantyFinishDate" ColumnName="productWarrantyFinishDate" />
+                <ScalarProperty Name="productProvider" ColumnName="productProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="UTSContextModel.Requests">
+              <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="requestUsername" ColumnName="requestUsername" />
+                <ScalarProperty Name="requestID" ColumnName="requestID" />
+                <ScalarProperty Name="requestSubjectTitle" ColumnName="requestSubjectTitle" />
+                <ScalarProperty Name="requestCategoryName" ColumnName="requestCategoryName" />
+                <ScalarProperty Name="requestDateTime" ColumnName="requestDateTime" />
+                <ScalarProperty Name="requestMessage" ColumnName="requestMessage" />
+                <ScalarProperty Name="requestStatus" ColumnName="requestStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="UTSContextModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="role1" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LoginByUsernamePassword" FunctionName="UTSContextModel.Store.LoginByUsernamePassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UTSContextModel.LoginByUsernamePassword_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

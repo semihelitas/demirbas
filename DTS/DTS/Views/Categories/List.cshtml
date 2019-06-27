@@ -1,0 +1,135 @@
+﻿@model IEnumerable<DTS.Models.Category>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Heading -->
+<div class="card mb-4 wow fadeIn ustNav">
+
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            &nbsp;
+            <i class="fas fa-archive" style="color:#139747"></i>
+            <a href="#" style="color:#139747">&nbsp; Ürün Takip Sistemi</a>
+            <span style="color:#139747"> &nbsp; > &nbsp; </span>
+            <a href="#" style="color:#139747">Kategoriler</a>
+        </h4>
+
+        <form class="d-flex justify-content-center">
+            <!-- Default input -->
+            <input id="search" placeholder="Kategori Ara" class="form-control" autocomplete="off">
+        </form>
+
+    </div>
+
+</div>
+<!-- Heading -->
+
+<div style="display: none;" id="ErrorNotify" class="alert alert-danger" role="alert">
+    <i class="fas fa-trash-alt"></i> Kategori siliniyor..
+</div>
+        <!--Card-->
+        <div class="card">
+
+            <!--Card content-->
+            <div class="card-body">
+
+                <!-- Table  -->
+                <table class="table table-hover tablom">
+                    <!-- Table head -->
+                    <thead class="bg-via lighten-4">
+                        <tr>
+                            <th style="width: 15%">KATEGORİ NO.</th>
+                            <th style="width: 40%">KATEGORİ ADI</th>
+                            <th style="width: 20%">KAYIT SAYISI</th>
+                            <th style="width: 25%">
+                                <button class="btn btn-outline btn-sm my-0 p" type="button" style="position:center; margin-left: auto; background-color:whitesmoke; color:forestgreen;" onclick="location.href='@Url.Action("Add", "Categories")'">
+                                    @*<i class="fas fa-plus"></i>*@
+                                    ÜRÜN EKLE
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- Table head -->
+                    <!-- Table body -->
+                    <tbody id="myTable">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.CategoryID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
+                                <td>@item.Product.Where(x => x.CategoryID == item.CategoryID).Count()</td>
+
+                                <td>
+                                    <button class="btn-outline-success" type="button" onclick="location.href='@Url.Action("Update", "Categories", new { id = item.CategoryID })'">
+                                        <i style="color:dodgerblue;" class="fas fa-edit"></i>
+                                    </button>
+
+                                    <button class="btn-outline-success btn-sil" data-category-id="@item.CategoryID" data-category-name="@item.CategoryName" type="button" data-toggle="modal" data-target="#modalSil" )'">
+                                        <i style="color:tomato;" class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <!-- Table body -->
+                </table>
+                <!-- Table  -->
+            </div>
+        </div>
+
+        <!-- Delete Pop Modals -->
+        <div class="modal fade" id="modalSil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:forestgreen; color:white;">
+                        <h5 class="modal-title" @*id="category-id"*@ style="margin-left:auto;">Ürün Sil</h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="text-align:center;">
+                        <i style="color:red;" class="fas fa-exclamation-circle"></i> Eğer bu ürünü silerseniz, ürüne ait kayıtlarda silinecektir. <br /><hr />
+                        <text id="category-name"></text> ürününü ve ona ait kayıtları silmek istediğinizden emin misiniz?
+                    </div>
+                    <div class="modal-footer">
+                        <form action="~/Categories/DeleteConfirmed" method="post">
+                            <input id="id" name="id" type="hidden" />
+                            @Html.AntiForgeryToken()
+                            <button id="DeleteNotify" type="submit" class="btn btn-danger">SİL</button>
+                        </form>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">İPTAL</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            // Silme Butonu Fonksiyonları
+            $(".btn-sil").on("click", function () {
+                $("#id").val($(this).data("category-id"));
+                $("#category-name")[0].innerHTML = $(this).data("category-name");
+            })
+
+            // Filtre/Search Butonu Fonksiyonları -> https://www.w3schools.com/jquery/jquery_filters.asp
+            $(document).ready(function () {
+                $("#search").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+
+            $("#DeleteNotify").on("click", function () {
+                $("#ErrorNotify").show();
+            })
+
+        </script>

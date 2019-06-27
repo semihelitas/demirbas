@@ -1,0 +1,102 @@
+﻿@model DTS.Models.Login
+@{
+    ViewBag.Title = "SuperAdminSettings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- CSS/Style -->
+<link href="~/Content/vendor/css/argon.min.css" rel="stylesheet" />
+<hr style="line-height:22px" />
+
+<!-- Üst 3'lu Menu -->
+<div class="container-fluid">
+    <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+
+            <div class="col-xl-4 col-lg-6">
+                <div class="card card-stats mb-4 mb-xl-0">
+                    <div onclick="location.href='@Url.Action("NewUser", "Admin")'" style="cursor: pointer" class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-uppercase text-muted mb-0">Hesap Oluştur</h5>
+                                <span class="h2 font-weight-300 mb-0">Yeni Kullanıcı</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-blue text-white rounded-circle shadow">
+                                    <i class="fas fa-user-astronaut"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-6">
+                <div class="card card-stats mb-4 mb-xl-0">
+                    <div onclick="location.href='@Url.Action("UserList", "Admin")'" style="cursor: pointer" class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-uppercase text-muted mb-0">@ViewBag.CountUser Aktif Kullanıcı</h5>
+                                <span class="h2 font-weight-300 mb-0">Kullanıcılar</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-4 col-lg-6">
+                <div class="card activeCard card-stats mb-4 mb-xl-0">
+                    <div onclick="location.href='@Url.Action("AdminSettings", "Account")'" style="cursor: pointer" class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title text-uppercase text-muted mb-0">MEVCUT HESAP</h5>
+                                <span class="h2 font-weight-300 mb-0 ">Hesap Ayarları</span>
+                            </div>
+                            <div class="col-auto">
+                                <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Şifre Değiştirme Ekranı -->
+<div class="login-page">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.username)
+        <div class="form">
+            <h5 style="font-weight:bolder"><span class="fa fa-user-lock"></span> &nbsp; Parola Değişikliği</h5>
+            <br />
+
+            <form class="login-form" autocomplete="off">
+                <input style="text-align:center" type="password" name="currentPassword" placeholder="mevcut parola" autocomplete="off" maxlength="25" required />
+                <input style="text-align:center" type="password" name="newPassword" placeholder="yeni parola" autocomplete="off" maxlength="25" required />
+                <input style="text-align:center" type="password" name="newPasswordAgain" placeholder="parola tekrar" autocomplete="off" maxlength="25" required />
+
+                <br />
+                <input type="submit" value="Parolayı Sıfırla" class="btn btn-green" style="font-weight:bolder" />
+            </form>
+        </div>
+    }
+</div>
+
+<!-- JS/Script -->
+<script src="~/Content/vendor/js/jquery-3.3.1.min.js"></script>
+<script src="~/Content/vendor/js/argon.min.js"></script>

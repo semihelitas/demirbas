@@ -1,0 +1,33 @@
+﻿@model DTS.Models.Category
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="login-page">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            <div class="form">
+
+                <h5 style="font-weight:bolder; color:darkgreen"><span class="fa fa-folder-plus"></span> &nbsp; Yeni Kategori</h5>
+                <hr />
+                <br />
+
+                <form class="login-form" autocomplete="off">
+                    @Html.EditorFor(model => model.CategoryID, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", placeholder = "Kategori Numarası", style = "text-align:center" } })
+
+                    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", placeholder = "Kategori Adı", style = "text-align:center" } })
+                    <br />
+
+                    <input type="submit" value="KATEGORİ EKLE" class="btn btn-green"/>
+                    <input type="button" value="Listeye Dön" class="btn btn-green" onclick="location.href='@Url.Action("List", "Categories")'" />
+
+                </form>
+            </div>
+        }
+    </div>

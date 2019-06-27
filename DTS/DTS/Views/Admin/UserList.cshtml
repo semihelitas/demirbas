@@ -1,0 +1,91 @@
+﻿@model IEnumerable<DTS.Models.Login>
+@{
+    /**/
+
+    ViewBag.Title = "UserList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int sayac = 1;
+}
+
+<link href="~/Content/vendor/css/argon.min.css" rel="stylesheet" />
+
+<hr/>
+
+<!-- Top Admin Menu -->
+@Html.Partial("~/Views/Admin/AdminMenu.cshtml")
+
+<hr />
+
+<!-- List Table -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Kullanıcı Hesapları</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Kullanıcı Adı</th>
+                                <th scope="col">Kullanıcı Rolü</th>
+                                <th scope="col">İŞLEMLER</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td> @sayac </td>
+                                    <td> @item.username </td>
+                                    <td>
+                                        @if (item.role_id == 1)
+                                        {
+                                            <span class="badge bg-gradient-orange">
+                                                @item.Role.role1
+                                            </span>
+                                        }
+                                        else if (item.role_id == 2)
+                                        {
+                                            <span class="badge bg-gradient-info">
+                                                @item.Role.role1
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-gradient-red">
+                                                @item.Role.role1
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-icon btn-2 btn-outline-blue" type="button" onclick="location.href='@Url.Action("UpdateUser", "Admin", new { id = item.id })'">
+                                            <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
+
+                                        </button>
+                                        <button class="btn btn-icon btn-2 btn-outline-danger" type="button">
+                                            <span class="btn-inner--icon"><i class="fa fa-trash"></i></span>
+
+                                        </button>
+                                    </td>
+                                </tr>
+                                sayac++;
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+                <!-- Footer Table -->
+                <div class="card-footer py-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/vendor/js/jquery-3.3.1.min.js"></script>
+<script src="~/Content/vendor/js/argon.min.js"></script>
+
+

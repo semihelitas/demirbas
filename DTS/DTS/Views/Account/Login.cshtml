@@ -1,0 +1,52 @@
+﻿@using DTS.Models
+@model LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!-- CSS/Style -->
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/vendor/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Scripts/particles.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:200&display=swap" rel="stylesheet">
+
+<!-- Login Ekranı -->
+<div id="particles-js" class="login-page">
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form">
+            <a class="logo-wrapper waves-effect">
+                <img src="~/Content/images/via.png" class="img-responsive" alt="VIA Teknoloji" />
+            </a>
+            <br />
+            <hr />
+            <h5 style="font-weight:bolder">Ürün Takip Sistemi</h5>
+            <hr />
+            <br />
+            <form class="login-form " autocomplete="off">
+                @Html.TextBoxFor(m => m.Username, new { @class = "waves-input-wrapper", placeholder = "kullanıcı adı", autocomplete = "off",  style = "text-align:center", required = "required", maxlength="20" })
+                @Html.PasswordFor(m => m.Password, new { @class = "input-default-js reqiured", placeholder = "şifre", style = "text-align:center", required = "required", maxlength = "25" })
+                <input type="submit" value="giriş yap" class="btn btn-default" style="font-weight:bolder" />
+                @Html.ValidationSummary(true, "", new { @class = "text text-danger" })
+                <br />
+                <p class="message" style="font-weight:bolder"><a href="#">&copy; &nbsp;2019, Via Bilgisayar</a></p>
+            </form>
+        </div>
+    }
+</div>
+
+<!-- JS/Script -->
+<script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/JavaScript" src="~/Scripts/particles.js"></script>
+<script type="text/JavaScript" src="~/Scripts/app.js"></script>
+<script type="text/JavaScript" src="~/Scripts/print.js"></script>
+<script type="text/javascript" src="~/Content/vendor/js/bootstrap.min.js"></script>
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+    particlesJS("particles-js", { "particles": { "number": { "value": 150, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#ffffff" }, "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" }, "polygon": { "nb_sides": 5 }, "image": { "src": "img/github.svg", "width": 100, "height": 100 } }, "opacity": { "value": 0.5, "random": false, "anim": { "enable": false, "speed": 1, "opacity_min": 0.1, "sync": false } }, "size": { "value": 3, "random": true, "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false } }, "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 6, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false, "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 } } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "grab": { "distance": 400, "line_linked": { "opacity": 1 } }, "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 }, "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 }, "remove": { "particles_nb": 2 } } }, "retina_detect": true }); var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function () { stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; } requestAnimationFrame(update); }; requestAnimationFrame(update);;
+</script>

@@ -1,0 +1,39 @@
+﻿@model DTS.Models.Person
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="login-page">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            <div class="form">
+
+                <h5 style="font-weight:bolder; color:darkgreen"><span class="fa fa-user-plus"></span> &nbsp; Yeni Personel</h5>
+                <hr />
+                <br />
+
+                <form class="login-form" autocomplete="off">
+                    @Html.EditorFor(model => model.PersonID, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", placeholder = "Personel Numarası" } })
+                    @Html.ValidationMessageFor(model => model.PersonID, "", new { @class = "text-danger" })
+
+                    @Html.EditorFor(model => model.PersonName, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", placeholder = "Personel Adı" } })
+                    @Html.ValidationMessageFor(model => model.PersonName, "", new { @class = "text-danger" })
+
+                    @Html.EditorFor(model => model.PersonContact, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", placeholder = "Personel İletişim" } })
+                    @Html.ValidationMessageFor(model => model.PersonContact, "", new { @class = "text-danger" })
+
+                    <br />
+
+                    <input type="submit" value="PERSONEL EKLE" class="btn btn-green" />
+                    <input type="button" value="Listeye Dön" class="btn btn-green" onclick="location.href='@Url.Action("List", "People")'" />
+
+                </form>
+            </div>
+        }
+    </div>

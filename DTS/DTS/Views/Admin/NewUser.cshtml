@@ -1,0 +1,54 @@
+﻿@model DTS.Models.Login
+@{
+    ViewBag.Title = "NewUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/vendor/css/argon.min.css" rel="stylesheet" />
+
+<hr />
+
+<!-- Top Admin Menu -->
+@Html.Partial("~/Views/Admin/AdminMenu.cshtml")
+
+<hr />
+
+<!-- User Add Form -->
+<div class="login-form">
+    @using (Html.BeginForm("NewUser", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+    <form>
+
+        <div class="avatar" style="background-color:white">
+            <img src="~/Content/images/employee.png" alt="Avatar">
+        </div>
+        <h2 class="text-center">Yeni Kullanıcı</h2>
+
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.username, new { @class = "form-control", placeholder = "kullanıcı adı", autocomplete = "off", required = "required", maxlength = "20" })
+        </div>
+
+        <div class="form-group">
+            @Html.PasswordFor(m => m.password, new { @class = "form-control", placeholder = "parola", required = "required", maxlength = "25" })
+        </div>
+
+        <select class="form-control" id="role_id" name="role_id" required="required">
+            <option value="" disabled selected>Rol Seçiniz</option>
+            <option value="1">Yönetici</option>
+            <option value="2">Kullanıcı</option>
+        </select>
+
+        <br>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-4 btn-outline-dark-green">
+                <span class="btn-inner--icon"><i class="fa fa-user-plus"></i></span>&nbsp; &nbsp; Kullanıcı Oluştur
+            </button>
+        </div>
+    </form>
+    }
+</div>
+

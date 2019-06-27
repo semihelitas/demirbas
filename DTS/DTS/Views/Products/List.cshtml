@@ -1,0 +1,227 @@
+﻿@model IEnumerable<DTS.Models.Product>
+@{
+    ViewBag.Title = "list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var sayac = 1;
+}
+
+<!-- Heading -->
+<div class="card mb-4 wow fadeIn ustNav">
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            &nbsp;
+            <i class="fas fa-list-ol" style="color:#139747"></i>
+            <a href="#" style="color:#139747"> &nbsp; Ürün Takip Sistemi</a>
+            <span style="color:#139747"> &nbsp; > &nbsp; </span>
+            <a href="#" style="color:#139747">Demirbaş Listesi</a>
+
+        </h4>
+
+        <form class="d-flex justify-content-center">
+            <!-- Default input -->
+            <input id="search" placeholder="Demirbaş Ara" class="form-control" autocomplete="off"> &nbsp;
+            <button class="btn btn-print btn-outline-light-green  btn-sm my-0 p" position:center; background-color:whitesmoke; color:forestgreen;>
+                <i class="fas fa-print"></i>
+            </button>
+        </form>
+    </div>
+</div>
+<!-- Heading -->
+
+<div class="row wow fadeIn">
+    <!--Grid column-->
+    <div class="col-md-12 mb-4">
+
+        <!--Card-->
+        <div class="card">
+
+            <!--Card content-->
+            <div class="card-body" id="printable">
+
+                <!-- Table  -->
+                <table class="table table-hover tablom">
+                    <!-- Table head -->
+                    <thead class="lighten-4">
+                        <tr>
+                            <th style="width: 3%"><i class="fas fa-list-ol"></i></th>
+                            <th> SERİ NUMARASI </th>
+                            <th> SORUMLU </th>
+                            <th> KATEGORİ </th>
+                            <th> MARKA </th>
+                            <th> KAYIT TARİHİ </th>
+                            <th> ADET </th>
+
+                            <th id="Ekle" class="not-printable">
+                                <button class="btn btn-outline btn-sm my-0 p" style="width:100%; position:center; margin-left: auto; background-color:whitesmoke; color:forestgreen;" onclick="location.href='@Url.Action("Add", "Products")'">
+                                    EKLE
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- Table head -->
+                    <!-- Table body -->
+                    <tbody id="myTable">
+                        @foreach (var item in Model)
+                        {
+
+                        <tr style="font-weight:bold;">
+                            <td>@sayac</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductSerialNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Person.PersonName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Category.CategoryName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductBrand)</td>
+                            <td>@Html.DisplayFor(modelItem => item.RegisterDateTime)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductAmount)</td>
+
+                            <td id="Btns" class="not-printable">
+                                <button class="btn-outline-success btn-image" data-product-id="@item.ProductSerialNumber" data-image="@item.ProductImage" type="button" onclick="window.open('/Content/images/Products/@item.ProductImage');">
+                                    <i style="color:lightslategrey" class="fas fa-images"></i>
+                                </button>
+
+                                <button class="btn-outline-success" type="button" onclick="location.href='@Url.Action("Update", "Products", new { id = item.ProductSerialNumber })'">
+                                    <i style="color:dodgerblue" class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-outline-success btn-detail" type="button" data-toggle="modal" data-target="#modalDetay" data-product-detail-id="@item.ProductSerialNumber" data-person="@item.Person.PersonName" data-category="@item.Category.CategoryName" data-brand="@item.ProductBrand" data-register-date="@item.RegisterDateTime" data-amount="@item.ProductAmount" data-warranty="@item.ProductWarrantyDate" data-service="@item.ServiceContact" data-features="@item.ProductFeatures" data-image="@item.ProductImage">
+                                    <i style="color:orange" class="fas fa-info-circle"></i>
+                                </button>
+                                <button class="btn-outline-success btn-sil" data-product-id="@item.ProductSerialNumber" type="button" data-toggle="modal" data-target="#modalSil" )'">
+                                    <i style="color:tomato" class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                            @{sayac++;}
+                        </tr>
+                        }
+                    </tbody>
+                    <!-- Table body -->
+                </table>
+                <!-- Table  -->
+
+            </div>
+        </div>
+        <!--/.Card-->
+
+    </div>
+    <!--Grid column-->
+</div>
+
+<!---------------------------------------------------------------------------------------------- POPUPS ------------------------------------------------------->
+<!-- Delete Pop Modals -->
+<div class="modal fade" id="modalSil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:forestgreen; color:white;">
+                <h5 class="modal-title" style="margin-left:auto;">Kayıt Sil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                <text id="modaltitle"></text> seri numaralı ürün kaydını silmek istediğinizden emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <form action="~/Products/DeleteConfirmed" method="post">
+                    <input id="id" name="id" type="hidden" />
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">SİL</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">İPTAL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detail Pop Modals -->
+<div class="modal fade" id="modalDetay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:forestgreen; color:white;">
+                <h5 class="modal-title" style="margin-left:auto;">ÜRÜN DETAYI</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" @*style="text-align:center;"*@>
+                <ul class="list-group z-depth-0">
+                    <li class="list-group-item justify-content-between">
+                        <span class="fas fa-fingerprint"></span> &nbsp;
+                        Seri Numarası: &nbsp; <b id="product-id"></b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        <span class="fas fa-calendar-alt"></span> &nbsp;
+                        Garanti Tarihi: &nbsp; <b id="product-warranty"></b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        <span class="fas fa-address-book"></span> &nbsp;
+                        Servis İletişim: &nbsp; <b id="product-service"></b>
+                    </li>
+                    <li class="list-group-item justify-content-between">
+                        <span class="fas fa-tasks"></span> &nbsp;
+                        Ürün Açıklaması: &nbsp; <b id="product-features"></b>
+                    </li>
+                </ul>
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+<!----SCRIPTS----->
+
+
+<script>
+
+
+    $(document).ready(function () {
+        
+    });
+
+
+    // Silme Butonu Fonksiyonları
+    $(".btn-sil").on("click", function () {
+        $("#id").val($(this).data("product-id"));
+        var gdata = $("#id").val($(this).data("product-id"));
+        $("#modaltitle")[0].innerHTML = $(this).data("product-id");
+    })
+
+    // Detaylar Butonu Fonksiyonları
+    $(".btn-detail").on("click", function () {
+        $("#id").val($(this).data("product-detail-id"));
+        $("#product-id")[0].innerHTML = $(this).data("product-detail-id");
+        $("#product-warranty")[0].innerHTML = $(this).data("warranty");
+        $("#product-service")[0].innerHTML = $(this).data("service");
+        $("#product-features")[0].innerHTML = $(this).data("features");
+    })
+
+    // Filtre/Search Butonu Fonksiyonları -> https://www.w3schools.com/jquery/jquery_filters.asp
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    // Printer/Yazdır Butonu Fonksiyonları ->
+    $(".btn-print").on("click", function () {
+        $("#printable").print({
+                globalStyles: true,
+                mediaPrint: false,
+                stylesheet: null,
+        	    noPrintSelector: ".not-printable",
+                iframe: true,
+                append: "<hr> <p><center>Via Teknoloji | Demirbaş Takip Sistemi Raporu [@DateTime.Now]<center></p> ",
+                prepend: ".img-responsive",
+        	    manuallyCopyFormValues: true,
+        	    deferred: $.Deferred(),
+                timeout: 750,
+                title: null,
+        	    doctype: '<!doctype html>'
+        });
+    })
+</script>
+

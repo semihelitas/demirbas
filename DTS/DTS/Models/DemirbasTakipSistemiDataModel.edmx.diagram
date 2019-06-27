@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a3305d7e41724ab9b846c5f1cc4617d5" Name="Diagram1">
+        <EntityTypeShape EntityType="DemirbasTakipSistemiDBModel.Category" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiDBModel.Location" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiDBModel.Person" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiDBModel.Product" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="DemirbasTakipSistemiDBModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DemirbasTakipSistemiDBModel.FK_Product_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="DemirbasTakipSistemiDBModel.FK_Product_Person" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DemirbasTakipSistemiDBModel.UserAccount" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

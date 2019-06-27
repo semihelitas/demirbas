@@ -1,0 +1,60 @@
+﻿@model DTS.Models.Requests
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/System/SystemMenu.cshtml")
+
+<div class="login-page" style="margin-top: -40px">
+
+    @using (Html.BeginForm("Feedback", "System", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.requestID)
+    <div class="form">
+        <button class="btn btn-icon btn-2 btn-outline-blue" type="button" onclick="location.href='@Url.Action("Home", "System", new {})'">
+            <span class="btn-inner--icon"><i class="fa fa-envelope"></i></span>&nbsp; Talep Kutusu
+
+        </button>
+        <hr />
+        <h2 style="font-weight:bolder"><span class="fa fa-paper-plane"></span> &nbsp; Geliştiriciye Ulaşın</h2>
+        <br />
+
+        <form class="form-control" autocomplete="off">
+            <input class="form-control" type="text" name="requestSubjectTitle" placeholder="KONU BAŞLIĞI" autocomplete="off" required />
+
+            <select class="form-control" id="projectStatus" name="requestCategoryName" required>
+                <option value="" disabled selected>KATEGORİ SEÇİNİZ</option>
+                <option value="DEMİRBAŞ LİSTESİ">DEMİRBAŞ LİSTESİ</option>
+                <option value="PROJE-ÜRÜN LİSTESİ">PROJE-ÜRÜN LİSTESİ</option>
+                <option value="ÜRÜN KATEGORİLERİ">ÜRÜN KATEGORİLERİ</option>
+                <option value="PERSONEL LİSTESİ">PERSONEL LİSTESİ</option>
+                <option value="SİSTEM İŞLEMLERİ">SİSTEM İŞLEMLERİ</option>
+                <option value="HESAP AYARLARI">HESAP AYARLARI</option>
+                <option value="DİĞER/YENİLİK">DİĞER/YENİLİK</option>
+            </select>
+
+            <br />
+
+            <select class="form-control" id="projectStatus" name="requestReceiverID" required>
+                <option value="" disabled selected>GELİŞTİRİCİ SEÇİNİZ</option>
+                <option value="Semih Elitaş">SEMİH ELİTAŞ</option>
+            </select>
+
+            <br />
+
+            <textarea name="requestMessage" class="form-control" cols="40" rows="5" placeholder="İSTEK VEYA ÖNERİLERİNİZ" required></textarea>
+
+            <br />
+            <div>
+                <input type="submit" value="Talep Gönder" class="btn btn-green" style="font-weight:bolder" />
+            </div>
+        </form>
+    </div>
+    }
+</div>
+
+<script src="~/Content/vendor/js/jquery-3.3.1.min.js"></script>
+<script src="~/Content/vendor/js/argon.min.js"></script>

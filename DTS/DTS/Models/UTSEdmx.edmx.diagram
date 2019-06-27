@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9fb5546bfc0a431ea738e21c45e6c9c5" Name="Diagram1">
+        <EntityTypeShape EntityType="UTSContextModel.Category" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSContextModel.CurrentUserData" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSContextModel.Login" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSContextModel.PatchNotes" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSContextModel.Person" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSContextModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSContextModel.Project" Width="1.5" PointX="2.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSContextModel.ProjectProducts" Width="1.5" PointX="5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSContextModel.Requests" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UTSContextModel.Role" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="UTSContextModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSContextModel.FK_PatchNotes_PatchNotes" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSContextModel.R_10" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSContextModel.FK_Product_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="UTSContextModel.FK_ProjectProducts_Project" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

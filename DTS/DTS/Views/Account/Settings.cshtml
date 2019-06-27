@@ -1,0 +1,31 @@
+﻿@model DTS.Models.Login
+
+@{
+    ViewBag.Title = "list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Scripts.Render("~/bundles/modernizr");
+}
+
+<div class="login-page">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.username)
+        <div class="form">
+            <h5 style="font-weight:bolder"><span class="fa fa-user-lock"></span> &nbsp; Parola Değişikliği</h5>
+            <hr />
+            <br />
+
+            <form class="login-form" autocomplete="off">
+                <input style="text-align:center" type="password" name="currentPassword" placeholder="mevcut parola" autocomplete="off" maxlength="25" required />
+                <input style="text-align:center" type="password" name="newPassword" placeholder="yeni parola" autocomplete="off" maxlength="25" required />
+                <input style="text-align:center" type="password" name="newPasswordAgain" placeholder="parola tekrar" autocomplete="off" maxlength="25" required />
+
+                <br />
+                <input type="submit" value="Parolayı Sıfırla" class="btn btn-green" style="font-weight:bolder" />
+            </form>
+        </div>
+    }
+</div>

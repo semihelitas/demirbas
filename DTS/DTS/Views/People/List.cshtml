@@ -1,0 +1,135 @@
+﻿@model IEnumerable<DTS.Models.Person>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Heading -->
+<div class="card mb-4 wow fadeIn ustNav">
+
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            &nbsp;
+            <i class="fas fa-user-friends" style="color:#139747"></i>
+            <a href="#" style="color:#139747">&nbsp; Demirbaş Takip Sistemi</a>
+            <span style="color:#139747"> &nbsp; | &nbsp; </span>
+            <a href="#" style="color:#139747">Personeller</a>
+        </h4>
+
+        <form class="d-flex justify-content-center">
+            <!-- Default input -->
+            <input id="search" placeholder="Personel Ara" class="form-control" autocomplete="off">
+        </form>
+
+    </div>
+
+</div>
+<!-- Heading -->
+<!--Card-->
+<div class="card">
+
+    <!--Card content-->
+    <div class="card-body">
+
+        <!-- Table  -->
+        <table class="table table-hover tablom">
+            <!-- Table head -->
+            <thead class="bg-via lighten-4">
+                <tr>
+                    <th style="width: 13%">PERSONEL NO</th>
+                    <th style="width: 27%">PERSONEL ADI</th>
+                    <th style="width: 22%">PERSONEL İLETİŞİM</th>
+                    <th style="width: 13%">KAYIT SAYISI</th>
+                    <th style="width: 25%">
+                        <button class="btn btn-outline btn-sm my-0 p" type="button" style="position:center; margin-left: auto; background-color:whitesmoke; color:forestgreen;" onclick="location.href='@Url.Action("Add", "People")'">
+                            @*<i class="fas fa-plus"></i>*@
+                            PERSONEL EKLE
+                        </button>
+                    </th>
+                </tr>
+            </thead>
+            <!-- Table head -->
+            <!-- Table body -->
+            <tbody id="myTable">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.PersonID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PersonName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PersonContact)</td>
+                        <td>@item.Product.Where(x => x.PersonID == item.PersonID).Count()</td>
+
+                        <td>
+                            <button class="btn-outline-success" type="button" onclick="location.href='@Url.Action("Update", "People", new { id = item.PersonID })'">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-outline-success" type="button" onclick="location.href='@Url.Action("Details", "People", new { id = item.PersonID })'">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                            <button class="btn-outline-success btn-sil" data-person-id="@item.PersonID" data-person-name="@item.PersonName" type="button" data-toggle="modal" data-target="#modalSil" )'">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <!-- Table body -->
+        </table>
+        <!-- Table  -->
+    </div>
+</div>
+
+
+<!-- Delete Pop Modals -->
+<div class="modal fade" id="modalSil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:forestgreen; color:white;">
+                <h5 class="modal-title" @*id="person-id"*@ style="margin-left:auto;">Personel Sil</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                Eğer bu personeli silerseniz, personele ait kayıtlarda silinecektir. <br /><hr />
+                <text id="person-id"></text> personel numaralı <text id="person-name"></text> personelini silmek istediğinizden emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <form action="~/People/DeleteConfirmed" method="post">
+                    <input id="id" name="id" type="hidden" />
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">SİL</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">İPTAL</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JQuery -->
+<script>
+
+    // Silme Butonu Fonksiyonları
+    $(".btn-sil").on("click", function () {
+        $("#id").val($(this).data("person-id"));
+        $("#person-id")[0].innerHTML = $(this).data("person-id");
+        $("#person-name")[0].innerHTML = $(this).data("person-name");
+    })
+
+    
+    // Filtre/Search Butonu Fonksiyonları -> https://www.w3schools.com/jquery/jquery_filters.asp
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+</script>

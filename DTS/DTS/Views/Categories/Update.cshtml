@@ -1,0 +1,37 @@
+﻿@model DTS.Models.Category
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="login-page">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.CategoryID)
+            <div class="form">
+
+                <h5 style="font-weight:bolder; color:darkgreen"><span class="fa fa-folder-plus"></span> &nbsp; Yeni Kategori</h5>
+                <hr />
+                <br />
+
+                <form class="login-form" autocomplete="off">
+                    <label>Kategori Numarası</label>
+                    @Html.EditorFor(model => model.CategoryID, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", placeholder = "Kategori Numarası", style = "text-align:center" } })
+                    @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                    <label>Kategori Adı</label>
+                    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control", style = "text-align:center" } })
+                    @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+
+                    <br />
+
+                    <input type="submit" value="KATEGORİYİ GÜNCELLE" class="btn btn-green" />
+                    <input type="button" value="Listeye Dön" class="btn btn-green" onclick="location.href='@Url.Action("List", "Categories")'" />
+
+                </form>
+            </div>
+        }
+    </div>

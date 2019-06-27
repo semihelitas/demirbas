@@ -1,0 +1,70 @@
+﻿@model DTS.Models.Login
+@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    select {
+  text-align: center !important;
+  text-align-last: center !important;
+}
+
+</style>
+
+    <!-- Update Form -->
+    <div class="login-page">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+
+            <div class="form">
+                <h5 style="font-weight:bolder; color:darkgreen"><span class="fa fa-folder-plus"></span> &nbsp; Kullanıcı Düzenle</h5>
+                <hr />
+                <br />
+
+                <form class="login-form" autocomplete="off">
+                    <label>Kullanıcı Adı</label>
+                    <input type="text" name="username" value="@Model.username" placeholder="mevcut parola" autocomplete="off" style="text-align:center" />
+
+                    <label>Kullanıcı Şifre</label>
+                    <input type="password" name="password" value="@Model.password" placeholder="yeni parola" autocomplete="off" style="text-align:center" />
+
+                    <label>Kullanıcı Rol    </label>
+                    <!-- Proje Durumu: Aktif/Pasif -->
+                    <select class="form-control" id="role_id" name="role_id">
+                        @if (Model.role_id == 1)
+                        {
+                            <option value="1">Yönetici</option>
+                            <option value="2">Kullanıcı</option>
+                            <option value="3">Geliştirici</option>
+                        }
+                        else if (Model.role_id == 2)
+                        {
+                            <option value="2">Kullanıcı</option>
+                            <option value="1">Yönetici</option>
+                            <option value="3">Geliştirici</option>
+                        }
+                        else
+                        {
+                            <option value="3">Geliştirici</option>
+                            <option value="1">Yönetici</option>
+                            <option value="2">Kullanıcı</option>
+                        }
+                    </select>
+
+                    <br />
+
+                    <input type="submit" value="Kullanıcıyı Düzenle" class="btn btn-green" style="font-weight:bolder" />
+                    @*<span value="Dön" class="btn btn-outline-black" onclick="location.href='@Url.Action("List", "Projects")'">Listeye Dön</span>*@
+
+                </form>
+            </div>
+        }
+    </div>
+
+
+

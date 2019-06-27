@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DTS.Models.PatchNotes>
+@{
+    ViewBag.Title = "PatchNotes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("~/Views/System/SystemMenu.cshtml")
+
+<hr />
+
+<!-- List Table -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0 d-flex justify-content-between">
+                    <div>
+                        <h3 class="mb-0">SÜRÜM NOTLARI<br /></h3>Yenilikler, Düzeltmeler, Hata Gidermeleri
+                    </div>
+                    
+                    <select class="form-control" id="projectStatus" name="projectStatus">
+                        <option value="Selected" selected>v1.0.0.5 [Latest Version]</option>
+                        <option value="Aktif">v1.0.0.4</option>
+                        <option value="Pasif">v1.0.0.3</option>
+                        <option value="Pasif">v1.0.0.2</option>
+                        <option value="Pasif">v1.0.0.1</option>
+                    </select>
+                </div>
+              
+                <div class="table-responsive">
+                    <div class="table align-items-center table-flush">
+                        <div class="container-fluid">
+                            @foreach (var item in Model)
+                            {
+         
+                                    if (item.patchType == "Hata Giderme!")
+                                    {
+                                        <div class="alert alert-warning d-flex justify-content-between" role="alert">
+                                            <strong>@item.patchType</strong>@item.patchNote
+                                            <strong>@item.patchDateTime.ToShortDateString() &nbsp; | &nbsp; @item.Login.username</strong>
+                                        </div>
+                                    }
+                                    else if (item.patchType == "Değişiklik!")
+                                    {
+                                        <div class="alert alert-primary d-flex justify-content-between" role="alert">
+                                            <strong>@item.patchType</strong>@item.patchNote
+                                            <strong>@item.patchDateTime.ToShortDateString() &nbsp; | &nbsp; @item.Login.username</strong>
+                                        </div>
+                                    }
+                                    else if (item.patchType == "Yenilik!")
+                                    {
+                                        <div class="alert alert-success d-flex justify-content-between" role="alert">
+                                            <strong>@item.patchType</strong>@item.patchNote
+                                            <strong>@item.patchDateTime.ToShortDateString() &nbsp; | &nbsp; @item.Login.username</strong>
+                                        </div>
+                                    }
+                             }          
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Table -->
+                <div class="card-footer py-4"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/vendor/js/jquery-3.3.1.min.js"></script>
+<script src="~/Content/vendor/js/argon.min.js"></script>
+
+
+
