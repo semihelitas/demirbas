@@ -1,2 +1,1 @@
-# yeniRepo
-sadasdasdas
+# Inventory Management System
